@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-compiler-version: Apple Swift version 6.0.2 effective-5.10 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
 // swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -enable-bare-slash-regex -module-name LikeMindsFeed
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import Alamofire
 import Foundation
 import Swift
@@ -34,14 +35,23 @@ public struct AddPollOptionResponse : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @_hasMissingDesignatedInitializers public class AddPostRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.AddPostRequest
-  public func build() -> LikeMindsFeed.AddPostRequest
-  public func attachments(_ attachments: [LikeMindsFeed.Attachment]) -> LikeMindsFeed.AddPostRequest
-  public func text(_ text: Swift.String?) -> LikeMindsFeed.AddPostRequest
-  public func heading(_ heading: Swift.String?) -> LikeMindsFeed.AddPostRequest
-  public func tempId(_ tempId: Swift.String) -> LikeMindsFeed.AddPostRequest
-  public func onBehalfOfUUID(_ onBehalfOfUUID: Swift.String?) -> LikeMindsFeed.AddPostRequest
-  public func addTopics(_ topics: [Swift.String]) -> LikeMindsFeed.AddPostRequest
+  public class Builder {
+    public var text: Swift.String?
+    public var heading: Swift.String?
+    public var onBehalfOfUUID: Swift.String?
+    public var attachments: [LikeMindsFeed.Attachment]?
+    public var topics: [Swift.String]?
+    public var tempId: Swift.String?
+    public init()
+    public func text(_ text: Swift.String?) -> LikeMindsFeed.AddPostRequest.Builder
+    public func heading(_ heading: Swift.String?) -> LikeMindsFeed.AddPostRequest.Builder
+    public func onBehalfOfUUID(_ onBehalfOfUUID: Swift.String?) -> LikeMindsFeed.AddPostRequest.Builder
+    public func attachments(_ attachments: [LikeMindsFeed.Attachment]?) -> LikeMindsFeed.AddPostRequest.Builder
+    public func topics(_ topics: [Swift.String]?) -> LikeMindsFeed.AddPostRequest.Builder
+    public func tempId(_ tempId: Swift.String?) -> LikeMindsFeed.AddPostRequest.Builder
+    public func build() -> LikeMindsFeed.AddPostRequest
+    @objc deinit
+  }
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
 }
@@ -50,7 +60,7 @@ public enum AttachmentType : Swift.Int, Swift.Encodable {
   case video
   case doc
   case link
-  case audio
+  case widget
   case poll
   case article
   case unknown
@@ -70,10 +80,14 @@ public class Attachment : Swift.Codable {
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
 }
-public class AttachmentMeta : Swift.Codable {
+@_hasMissingDesignatedInitializers public class AttachmentMeta : Swift.Codable {
   public var attachmentUrl: Swift.String?
   public var format: Swift.String?, name: Swift.String?
-  public var width: Swift.Int?, height: Swift.Int?, pageCount: Swift.Int?, duration: Swift.Int?, size: Swift.Int?
+  public var width: Swift.Int?
+  public var height: Swift.Int?
+  public var pageCount: Swift.Int?
+  public var duration: Swift.Int?
+  public var size: Swift.Int?
   public var ogTags: LikeMindsFeed.OGTags?
   public var coverImageUrl: Swift.String? {
     get
@@ -111,56 +125,54 @@ public class AttachmentMeta : Swift.Codable {
   public var allowAddOptions: Swift.Bool {
     get
   }
-  public init()
+  public var meta: [Swift.String : Any]?
+  public class Builder {
+    public var attachmentUrl: Swift.String?
+    public var format: Swift.String?, name: Swift.String?
+    public var width: Swift.Int?, height: Swift.Int?, pageCount: Swift.Int?, duration: Swift.Int?, size: Swift.Int?
+    public var ogTags: LikeMindsFeed.OGTags?
+    public var coverImageUrl: Swift.String?
+    public var title: Swift.String?
+    public var body: Swift.String?
+    public var entityID: Swift.String?
+    public var thumbnailUrl: Swift.String?
+    public var expiryTime: Swift.Int?
+    public var pollOptions: [Swift.String]?
+    public var multiSelectState: Swift.String
+    public var pollType: Swift.String
+    public var multSelectNo: Swift.Int
+    public var isAnonymous: Swift.Bool
+    public var allowAddOptions: Swift.Bool
+    public var meta: [Swift.String : Any]?
+    public init()
+    public func attachmentUrl(_ attachmentUrl: Swift.String?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func format(_ format: Swift.String?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func name(_ name: Swift.String?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func width(_ width: Swift.Int?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func height(_ height: Swift.Int?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func pageCount(_ pageCount: Swift.Int?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func duration(_ duration: Swift.Int?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func size(_ size: Swift.Int?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func ogTags(_ ogTags: LikeMindsFeed.OGTags?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func coverImageUrl(_ coverImageUrl: Swift.String?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func title(_ title: Swift.String?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func body(_ body: Swift.String?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func entityID(_ entityID: Swift.String?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func thumbnailUrl(_ thumbnailUrl: Swift.String?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func expiryTime(_ expiryTime: Swift.Int?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func pollOptions(_ pollOptions: [Swift.String]?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func multiSelectState(_ multiSelectState: Swift.String) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func pollType(_ pollType: Swift.String) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func multSelectNo(_ multSelectNo: Swift.Int) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func isAnonymous(_ isAnonymous: Swift.Bool) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func allowAddOptions(_ allowAddOptions: Swift.Bool) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func meta(_ meta: [Swift.String : Any]?) -> LikeMindsFeed.AttachmentMeta.Builder
+    public func build() -> LikeMindsFeed.AttachmentMeta
+    @objc deinit
+  }
   required public init(from decoder: any Swift.Decoder) throws
-  public func attachmentUrl(_ attachmentUrl: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func height(_ height: Swift.Int) -> LikeMindsFeed.AttachmentMeta
-  public func width(_ width: Swift.Int) -> LikeMindsFeed.AttachmentMeta
-  public func pageCount(_ pageCount: Swift.Int) -> LikeMindsFeed.AttachmentMeta
-  public func format(_ format: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func name(_ name: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func duration(_ duration: Swift.Int) -> LikeMindsFeed.AttachmentMeta
-  public func size(_ size: Swift.Int) -> LikeMindsFeed.AttachmentMeta
-  public func ogTags(_ ogTags: LikeMindsFeed.OGTags) -> LikeMindsFeed.AttachmentMeta
-  public func thumbnailUrl(_ thumbnailUrl: Swift.String?) -> LikeMindsFeed.AttachmentMeta
-  public func coverImageUrl(_ coverImageUrl: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func title(_ title: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func body(_ body: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func entityID(_ entityID: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func expiryTime(_ expiryTime: Swift.Int) -> LikeMindsFeed.AttachmentMeta
-  public func pollOptions(_ pollOptions: [Swift.String]) -> LikeMindsFeed.AttachmentMeta
-  public func multiSelectState(_ multiSelectState: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func pollType(_ pollType: Swift.String) -> LikeMindsFeed.AttachmentMeta
-  public func multSelectNo(_ multSelectNo: Swift.Int) -> LikeMindsFeed.AttachmentMeta
-  public func isAnonymous(_ isAnonymous: Swift.Bool) -> LikeMindsFeed.AttachmentMeta
-  public func allowAddOptions(_ allowAddOptions: Swift.Bool) -> LikeMindsFeed.AttachmentMeta
-  public func attachmentMetaData() -> LikeMindsFeed.AttachmentMeta
+  public func encode(to encoder: any Swift.Encoder) throws
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
-}
-public class BrandingRequest : Swift.Encodable {
-  public var communityId: Swift.Int
-  public init(communityId: Swift.Int)
-  @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
-}
-public struct BrandingResponse : Swift.Decodable, Swift.Encodable {
-  public var basicColor: LikeMindsFeed.BasicColor?
-  public var advanceColor: LikeMindsFeed.AdvanceColor?
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-public struct BasicColor : Swift.Decodable, Swift.Encodable {
-  public var basicColor: Swift.String?
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-public struct AdvanceColor : Swift.Decodable, Swift.Encodable {
-  public var headerColor: Swift.String?
-  public var buttonIconsColour: Swift.String?
-  public var textLinksColour: Swift.String?
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
 }
 public struct Comment : Swift.Codable {
   public let id: Swift.String?, userId: Swift.String?, uuid: Swift.String?, deletedByUUID: Swift.String?
@@ -536,24 +548,6 @@ public struct SDKClientInfo : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-public class LMChatClient {
-  public init(apiKey: Swift.String)
-  public func domainUrl(_ domain: Swift.String) -> LikeMindsFeed.LMChatClient
-  public func deviceUUID(_ deviceUUID: Swift.String) -> LikeMindsFeed.LMChatClient
-  public func callback(_ callback: any LikeMindsFeed.LikeMindsCallback) -> LikeMindsFeed.LMChatClient
-  @objc deinit
-}
-public protocol LikeMindsCallback : AnyObject {
-  func loginRequiredCallback()
-}
-extension LikeMindsFeed.LikeMindsCallback {
-  public func loginRequiredCallback()
-}
-@_hasMissingDesignatedInitializers public class LMClient {
-  public static let shared: LikeMindsFeed.LMClient
-  public func getBranding(request: LikeMindsFeed.BrandingRequest, response: LikeMindsFeed.LMFeedClientResponse<LikeMindsFeed.BrandingResponse>?)
-  @objc deinit
-}
 public typealias LMFeedClientResponse<T> = (LikeMindsFeed.LMResponse<T>) -> (Swift.Void) where T : Swift.Decodable
 extension LikeMindsFeed.LMFeedClient {
   public func initiateUser(request: LikeMindsFeed.InitiateUserRequest, response: LikeMindsFeed.LMFeedClientResponse<LikeMindsFeed.InitiateUserResponse>?)
@@ -717,7 +711,7 @@ public enum MemberRightState : Swift.Int, Swift.Codable {
   public init?(rawValue: Swift.Int)
   public typealias AllCases = [LikeMindsFeed.MemberRightState]
   public typealias RawValue = Swift.Int
-  public static var allCases: [LikeMindsFeed.MemberRightState] {
+  nonisolated public static var allCases: [LikeMindsFeed.MemberRightState] {
     get
   }
   public var rawValue: Swift.Int {
@@ -736,7 +730,7 @@ public enum ManagerRightState : Swift.Int, Swift.Codable {
   public init?(rawValue: Swift.Int)
   public typealias AllCases = [LikeMindsFeed.ManagerRightState]
   public typealias RawValue = Swift.Int
-  public static var allCases: [LikeMindsFeed.ManagerRightState] {
+  nonisolated public static var allCases: [LikeMindsFeed.ManagerRightState] {
     get
   }
   public var rawValue: Swift.Int {
@@ -852,12 +846,28 @@ public struct Widget : Swift.Decodable {
   public let createdAt: Swift.Double?
   public let updatedAt: Swift.Double?
   public let lmMeta: LikeMindsFeed.LMMeta?
+  public class Builder {
+    public init()
+    public func id(_ id: Swift.String?) -> LikeMindsFeed.Widget.Builder
+    public func parentEntityID(_ parentEntityID: Swift.String?) -> LikeMindsFeed.Widget.Builder
+    public func parentEntityType(_ parentEntityType: Swift.String?) -> LikeMindsFeed.Widget.Builder
+    public func metadata(_ metadata: [Swift.String : Any]?) -> LikeMindsFeed.Widget.Builder
+    public func createdAt(_ createdAt: Swift.Double?) -> LikeMindsFeed.Widget.Builder
+    public func updatedAt(_ updatedAt: Swift.Double?) -> LikeMindsFeed.Widget.Builder
+    public func lmMeta(_ lmMeta: LikeMindsFeed.LMMeta?) -> LikeMindsFeed.Widget.Builder
+    public func build() -> LikeMindsFeed.Widget
+    @objc deinit
+  }
 }
 extension LikeMindsFeed.Widget {
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct AnyDecodable : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
+}
+public struct AnyEncodable : Swift.Encodable {
+  public init(_ value: Any)
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 @_hasMissingDesignatedInitializers public class RegisterDeviceRequest : Swift.Encodable {
   public static func builder() -> LikeMindsFeed.RegisterDeviceRequest
