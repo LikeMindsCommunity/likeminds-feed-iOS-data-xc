@@ -10,23 +10,30 @@ import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@_hasMissingDesignatedInitializers public class AddCommentRequest : Swift.Encodable {
-  public var text: Swift.String?
-  public var postId: Swift.String?
-  public var tempId: Swift.String?
-  public static func builder() -> LikeMindsFeed.AddCommentRequest
-  public func build() -> LikeMindsFeed.AddCommentRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.AddCommentRequest
-  public func text(_ text: Swift.String) -> LikeMindsFeed.AddCommentRequest
-  public func tempId(_ tempId: Swift.String) -> LikeMindsFeed.AddCommentRequest
+@_hasMissingDesignatedInitializers final public class AddCommentRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.AddCommentRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.AddCommentRequest.Builder
+    public func text(_ text: Swift.String) -> LikeMindsFeed.AddCommentRequest.Builder
+    public func tempId(_ tempId: Swift.String) -> LikeMindsFeed.AddCommentRequest.Builder
+    public func build() -> LikeMindsFeed.AddCommentRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.AddCommentRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 @_hasMissingDesignatedInitializers final public class AddPollOptionRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.AddPollOptionRequest
-  final public func build() -> LikeMindsFeed.AddPollOptionRequest
-  final public func pollID(_ pollID: Swift.String) -> LikeMindsFeed.AddPollOptionRequest
-  final public func pollText(_ pollText: Swift.String) -> LikeMindsFeed.AddPollOptionRequest
+  public static func builder() -> LikeMindsFeed.AddPollOptionRequest.Builder
+  public class Builder {
+    public init()
+    public func pollID(_ pollID: Swift.String?) -> LikeMindsFeed.AddPollOptionRequest.Builder
+    public func pollText(_ pollText: Swift.String?) -> LikeMindsFeed.AddPollOptionRequest.Builder
+    public func build() -> LikeMindsFeed.AddPollOptionRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.AddPollOptionRequest.Builder
   @objc deinit
   final public func encode(to encoder: any Swift.Encoder) throws
 }
@@ -34,14 +41,10 @@ public struct AddPollOptionResponse : Swift.Decodable {
   public let widget: LikeMindsFeed.Widget?
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class AddPostRequest : Swift.Encodable {
+@_hasMissingDesignatedInitializers final public class AddPostRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.AddPostRequest.Builder
+  final public func toBuilder() -> LikeMindsFeed.AddPostRequest.Builder
   public class Builder {
-    public var text: Swift.String?
-    public var heading: Swift.String?
-    public var onBehalfOfUUID: Swift.String?
-    public var attachments: [LikeMindsFeed.Attachment]?
-    public var topics: [Swift.String]?
-    public var tempId: Swift.String?
     public init()
     public func text(_ text: Swift.String?) -> LikeMindsFeed.AddPostRequest.Builder
     public func heading(_ heading: Swift.String?) -> LikeMindsFeed.AddPostRequest.Builder
@@ -53,7 +56,7 @@ public struct AddPollOptionResponse : Swift.Decodable {
     @objc deinit
   }
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public enum AttachmentType : Swift.Int, Swift.Encodable {
   case image
@@ -63,6 +66,7 @@ public enum AttachmentType : Swift.Int, Swift.Encodable {
   case widget
   case poll
   case article
+  case reel
   case unknown
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
@@ -208,42 +212,96 @@ public struct CommunitySettingRight : Swift.Decodable {
   public let title: Swift.String?, subTitle: Swift.String?
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class DecodeUrlRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.DecodeUrlRequest
-  public func build() -> LikeMindsFeed.DecodeUrlRequest
-  public func link(_ link: Swift.String) -> LikeMindsFeed.DecodeUrlRequest
+@_hasMissingDesignatedInitializers final public class Constant {
+  public static let shared: LikeMindsFeed.Constant
+  final public let paths: LikeMindsFeed.Paths
+  final public let keys: LikeMindsFeed.Keys
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers final public class Paths {
+  public static let shared: LikeMindsFeed.Paths
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class Keys {
+  public static let shared: LikeMindsFeed.Keys
+  final public let page: Swift.String
+  final public let pageSize: Swift.String
+  final public let search: Swift.String
+  final public let searchType: Swift.String
+  final public let startFeedWithPostIds: Swift.String
+  final public let postId: Swift.String
+  final public let commentId: Swift.String
+  final public let topicIds: Swift.String
+  final public let isEnabled: Swift.String
+  final public let feedroomId: Swift.String
+  final public let activityId: Swift.String
+  final public let pollId: Swift.String
+  final public let votes: Swift.String
+  final public let options: Swift.String
+  final public let pollText: Swift.String
+  final public let configurationTypes: Swift.String
+  final public let memberState: Swift.String
+  final public let searchName: Swift.String
+  final public let type: Swift.String
+  final public let url: Swift.String
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class DecodeUrlRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.DecodeUrlRequest.Builder
+  public class Builder {
+    public init()
+    public func link(_ link: Swift.String) -> LikeMindsFeed.DecodeUrlRequest.Builder
+    public func build() -> LikeMindsFeed.DecodeUrlRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.DecodeUrlRequest.Builder
+  @objc deinit
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct DecodeUrlResponse : Swift.Decodable {
   public let oGTags: LikeMindsFeed.OGTags?
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class DeleteCommentRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.DeleteCommentRequest
-  public func build() -> LikeMindsFeed.DeleteCommentRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.DeleteCommentRequest
-  public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.DeleteCommentRequest
-  public func deleteReason(_ reason: Swift.String?) -> LikeMindsFeed.DeleteCommentRequest
+@_hasMissingDesignatedInitializers final public class DeleteCommentRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.DeleteCommentRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.DeleteCommentRequest.Builder
+    public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.DeleteCommentRequest.Builder
+    public func deleteReason(_ reason: Swift.String?) -> LikeMindsFeed.DeleteCommentRequest.Builder
+    public func build() -> LikeMindsFeed.DeleteCommentRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.DeleteCommentRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class DeletePostRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.DeletePostRequest
-  public func build() -> LikeMindsFeed.DeletePostRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.DeletePostRequest
-  public func deleteReason(_ reason: Swift.String?) -> LikeMindsFeed.DeletePostRequest
+@_hasMissingDesignatedInitializers final public class DeletePostRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.DeletePostRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.DeletePostRequest.Builder
+    public func deleteReason(_ reason: Swift.String?) -> LikeMindsFeed.DeletePostRequest.Builder
+    public func build() -> LikeMindsFeed.DeletePostRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.DeletePostRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class EditCommentRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.EditCommentRequest
-  public func build() -> LikeMindsFeed.EditCommentRequest
-  public func text(_ text: Swift.String) -> LikeMindsFeed.EditCommentRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.EditCommentRequest
-  public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.EditCommentRequest
+@_hasMissingDesignatedInitializers final public class EditCommentRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.EditCommentRequest.Builder
+  public class Builder {
+    public init()
+    public func text(_ text: Swift.String) -> LikeMindsFeed.EditCommentRequest.Builder
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.EditCommentRequest.Builder
+    public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.EditCommentRequest.Builder
+    public func build() -> LikeMindsFeed.EditCommentRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.EditCommentRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct EditCommentResponse : Swift.Codable {
   public let comment: LikeMindsFeed.Comment?
@@ -251,17 +309,22 @@ public struct EditCommentResponse : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class EditPostRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.EditPostRequest
-  public func build() -> LikeMindsFeed.EditPostRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.EditPostRequest
-  public func attachments(_ attachments: [LikeMindsFeed.Attachment]) -> LikeMindsFeed.EditPostRequest
-  public func text(_ text: Swift.String?) -> LikeMindsFeed.EditPostRequest
-  public func heading(_ heading: Swift.String?) -> LikeMindsFeed.EditPostRequest
-  public func onBehalfOfUUID(_ onBehalfOfUUID: Swift.String?) -> LikeMindsFeed.EditPostRequest
-  public func addTopics(_ topics: [Swift.String]) -> LikeMindsFeed.EditPostRequest
+@_hasMissingDesignatedInitializers final public class EditPostRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.EditPostRequest.Builder
+  public class Builder {
+    public init()
+    public func text(_ text: Swift.String?) -> LikeMindsFeed.EditPostRequest.Builder
+    public func heading(_ heading: Swift.String?) -> LikeMindsFeed.EditPostRequest.Builder
+    public func attachments(_ attachments: [LikeMindsFeed.Attachment]) -> LikeMindsFeed.EditPostRequest.Builder
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.EditPostRequest.Builder
+    public func onBehalfOfUUID(_ onBehalfOfUUID: Swift.String?) -> LikeMindsFeed.EditPostRequest.Builder
+    public func addTopics(_ topics: [Swift.String]) -> LikeMindsFeed.EditPostRequest.Builder
+    public func build() -> LikeMindsFeed.EditPostRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.EditPostRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct EditPostResponse : Swift.Decodable {
   public let post: LikeMindsFeed.Post?
@@ -269,6 +332,13 @@ public struct EditPostResponse : Swift.Decodable {
   public let widgets: [Swift.String : LikeMindsFeed.Widget]?
   public let topics: [Swift.String : LikeMindsFeed.TopicFeedResponse.TopicResponse]?
   public init(from decoder: any Swift.Decoder) throws
+}
+public struct Endpoint {
+}
+extension LikeMindsFeed.Endpoint {
+  public var url: Foundation.URL? {
+    get
+  }
 }
 @_hasMissingDesignatedInitializers final public class FeedTokenManager {
   public static var shared: LikeMindsFeed.FeedTokenManager {
@@ -280,13 +350,18 @@ public class Fonts {
   public init(regular: Swift.String, medium: Swift.String, bold: Swift.String)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class GetAllMembersRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetAllMembersRequest
-  public func build() -> LikeMindsFeed.GetAllMembersRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetAllMembersRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetAllMembersRequest
+@_hasMissingDesignatedInitializers final public class GetAllMembersRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetAllMembersRequest.Builder
+  public class Builder {
+    public init()
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetAllMembersRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetAllMembersRequest.Builder
+    public func build() -> LikeMindsFeed.GetAllMembersRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetAllMembersRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetAllMembersResponse : Swift.Decodable {
   public let community: LikeMindsFeed.Community?
@@ -294,25 +369,35 @@ public struct GetAllMembersResponse : Swift.Decodable {
   public let totalFilteredMembers: Swift.Int?, totalMembers: Swift.Int?, totalOnlyMembers: Swift.Int?, totalPendingMembers: Swift.Int?
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetCommentLikesRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetCommentLikesRequest
-  public func build() -> LikeMindsFeed.GetCommentLikesRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.GetCommentLikesRequest
-  public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.GetCommentLikesRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetCommentLikesRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetCommentLikesRequest
+@_hasMissingDesignatedInitializers final public class GetCommentLikesRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetCommentLikesRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.GetCommentLikesRequest.Builder
+    public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.GetCommentLikesRequest.Builder
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetCommentLikesRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetCommentLikesRequest.Builder
+    public func build() -> LikeMindsFeed.GetCommentLikesRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetCommentLikesRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetCommentRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetCommentRequest
-  public func build() -> LikeMindsFeed.GetCommentRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.GetCommentRequest
-  public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.GetCommentRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetCommentRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetCommentRequest
+@_hasMissingDesignatedInitializers final public class GetCommentRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetCommentRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.GetCommentRequest.Builder
+    public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.GetCommentRequest.Builder
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetCommentRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetCommentRequest.Builder
+    public func build() -> LikeMindsFeed.GetCommentRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetCommentRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetCommentResponse : Swift.Codable {
   public let comment: LikeMindsFeed.Comment?
@@ -327,12 +412,17 @@ public struct GetCommentsLikeResponse : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetCommunityConfigurationRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetCommunityConfigurationRequest
-  public func build() -> Self
-  public func configurationTypes(_ configurationTypes: [Swift.String]) -> LikeMindsFeed.GetCommunityConfigurationRequest
+@_hasMissingDesignatedInitializers final public class GetCommunityConfigurationRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetCommunityConfigurationRequest.Builder
+  public class Builder {
+    public init()
+    public func configurationTypes(_ configurationTypes: [Swift.String]) -> LikeMindsFeed.GetCommunityConfigurationRequest.Builder
+    public func build() -> LikeMindsFeed.GetCommunityConfigurationRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetCommunityConfigurationRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetCommunityConfigurationResponse : Swift.Decodable {
   public let communityConfigurations: [LikeMindsFeed.CommunityConfiguration]?
@@ -360,33 +450,50 @@ public struct CommunityConfiguration : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-public struct GetFeedOfFeedRoomRequest : Swift.Encodable {
-  public init(feedroomId: Swift.String)
-  public func encode(to encoder: any Swift.Encoder) throws
+@_hasMissingDesignatedInitializers final public class GetFeedOfFeedRoomRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetFeedOfFeedRoomRequest.Builder
+  public class Builder {
+    public init()
+    public func feedroomId(_ feedroomId: Swift.String) -> LikeMindsFeed.GetFeedOfFeedRoomRequest.Builder
+    public func build() -> LikeMindsFeed.GetFeedOfFeedRoomRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetFeedOfFeedRoomRequest.Builder
+  @objc deinit
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetFeedOfFeedRoomResponse : Swift.Decodable {
   public let posts: [LikeMindsFeed.Post]?
   public let users: [LikeMindsFeed.LikedUser]
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetFeedPostRequest : Swift.Encodable {
-  public var page: Swift.Int
-  public var pageSize: Swift.Int
-  public static func builder() -> LikeMindsFeed.GetFeedPostRequest
-  public func build() -> LikeMindsFeed.GetFeedPostRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetFeedPostRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetFeedPostRequest
+@_hasMissingDesignatedInitializers final public class GetFeedPostRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetFeedPostRequest.Builder
+  public class Builder {
+    public init()
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetFeedPostRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetFeedPostRequest.Builder
+    public func build() -> LikeMindsFeed.GetFeedPostRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetFeedPostRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetFeedRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetFeedRequest
-  public func build() -> LikeMindsFeed.GetFeedRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetFeedRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetFeedRequest
-  public func topics(_ topics: [Swift.String]) -> LikeMindsFeed.GetFeedRequest
+@_hasMissingDesignatedInitializers final public class GetFeedRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetFeedRequest.Builder
+  public class Builder {
+    public init()
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetFeedRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetFeedRequest.Builder
+    public func topics(_ topics: [Swift.String]) -> LikeMindsFeed.GetFeedRequest.Builder
+    public func startFeedWithPostIds(_ postIds: [Swift.String]) -> LikeMindsFeed.GetFeedRequest.Builder
+    public func build() -> LikeMindsFeed.GetFeedRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetFeedRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetFeedResponse : Swift.Decodable {
   public let posts: [LikeMindsFeed.Post]?
@@ -420,13 +527,18 @@ public struct GetMemberStateResponse : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetNotificationFeedRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetNotificationFeedRequest
-  public func build() -> LikeMindsFeed.GetNotificationFeedRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetNotificationFeedRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetNotificationFeedRequest
+@_hasMissingDesignatedInitializers final public class GetNotificationFeedRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetNotificationFeedRequest.Builder
+  public class Builder {
+    public init()
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetNotificationFeedRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetNotificationFeedRequest.Builder
+    public func build() -> LikeMindsFeed.GetNotificationFeedRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetNotificationFeedRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetNotificationFeedResponse : Swift.Decodable {
   public let activities: [LikeMindsFeed.Activity]?
@@ -434,12 +546,17 @@ public struct GetNotificationFeedResponse : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @_hasMissingDesignatedInitializers final public class GetPollVotesRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetPollVotesRequest
-  final public func build() -> LikeMindsFeed.GetPollVotesRequest
-  final public func pollID(_ pollID: Swift.String) -> LikeMindsFeed.GetPollVotesRequest
-  final public func options(_ options: [Swift.String]) -> LikeMindsFeed.GetPollVotesRequest
-  final public func page(_ page: Swift.Int) -> LikeMindsFeed.GetPollVotesRequest
-  final public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetPollVotesRequest
+  public static func builder() -> LikeMindsFeed.GetPollVotesRequest.Builder
+  public class Builder {
+    public init()
+    public func pollID(_ pollID: Swift.String?) -> LikeMindsFeed.GetPollVotesRequest.Builder
+    public func options(_ options: [Swift.String]) -> LikeMindsFeed.GetPollVotesRequest.Builder
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetPollVotesRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetPollVotesRequest.Builder
+    public func build() -> LikeMindsFeed.GetPollVotesRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetPollVotesRequest.Builder
   @objc deinit
   final public func encode(to encoder: any Swift.Encoder) throws
 }
@@ -460,23 +577,33 @@ public struct GetPostLikeResponse : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetPostLikesRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetPostLikesRequest
-  public func build() -> LikeMindsFeed.GetPostLikesRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.GetPostLikesRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetPostLikesRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetPostLikesRequest
+@_hasMissingDesignatedInitializers final public class GetPostLikesRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetPostLikesRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.GetPostLikesRequest.Builder
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetPostLikesRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetPostLikesRequest.Builder
+    public func build() -> LikeMindsFeed.GetPostLikesRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetPostLikesRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetPostRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetPostRequest
-  public func build() -> LikeMindsFeed.GetPostRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.GetPostRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetPostRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetPostRequest
+@_hasMissingDesignatedInitializers final public class GetPostRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetPostRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.GetPostRequest.Builder
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetPostRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetPostRequest.Builder
+    public func build() -> LikeMindsFeed.GetPostRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetPostRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetPostResponse : Swift.Decodable {
   public let post: LikeMindsFeed.Post?
@@ -485,12 +612,17 @@ public struct GetPostResponse : Swift.Decodable {
   public let widgets: [Swift.String : LikeMindsFeed.Widget]?
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetReportTagRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetReportTagRequest
-  public func build() -> LikeMindsFeed.GetReportTagRequest
-  public func type(_ type: Swift.Int) -> LikeMindsFeed.GetReportTagRequest
+@_hasMissingDesignatedInitializers final public class GetReportTagRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetReportTagRequest.Builder
+  public class Builder {
+    public init()
+    public func type(_ type: Swift.Int) -> LikeMindsFeed.GetReportTagRequest.Builder
+    public func build() -> LikeMindsFeed.GetReportTagRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetReportTagRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetReportTagResponse : Swift.Decodable {
   public let reportTags: [LikeMindsFeed.ReportTag]?
@@ -501,14 +633,19 @@ public struct ReportTag : Swift.Decodable {
   public let name: Swift.String?
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class GetTaggingListRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.GetTaggingListRequest
-  public func build() -> LikeMindsFeed.GetTaggingListRequest
-  public func searchName(_ searchName: Swift.String) -> LikeMindsFeed.GetTaggingListRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.GetTaggingListRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetTaggingListRequest
+@_hasMissingDesignatedInitializers final public class GetTaggingListRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.GetTaggingListRequest.Builder
+  public class Builder {
+    public init()
+    public func searchName(_ searchName: Swift.String) -> LikeMindsFeed.GetTaggingListRequest.Builder
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.GetTaggingListRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.GetTaggingListRequest.Builder
+    public func build() -> LikeMindsFeed.GetTaggingListRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.GetTaggingListRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct GetTaggingListResponse : Swift.Decodable {
   public let members: [LikeMindsFeed.User]?
@@ -518,15 +655,20 @@ public struct GetUnreadNotificationCountResponse : Swift.Decodable {
   public let count: Swift.Int?
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class InitiateUserRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.InitiateUserRequest
-  public func build() -> LikeMindsFeed.InitiateUserRequest
-  public func apiKey(_ apiKey: Swift.String) -> LikeMindsFeed.InitiateUserRequest
-  public func isGuest(_ isGuest: Swift.Bool) -> LikeMindsFeed.InitiateUserRequest
-  public func userName(_ userName: Swift.String?) -> LikeMindsFeed.InitiateUserRequest
-  public func uuid(_ uuid: Swift.String) -> LikeMindsFeed.InitiateUserRequest
+@_hasMissingDesignatedInitializers final public class InitiateUserRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.InitiateUserRequest.Builder
+  public class Builder {
+    public init()
+    public func apiKey(_ apiKey: Swift.String) -> LikeMindsFeed.InitiateUserRequest.Builder
+    public func isGuest(_ isGuest: Swift.Bool) -> LikeMindsFeed.InitiateUserRequest.Builder
+    public func userName(_ userName: Swift.String?) -> LikeMindsFeed.InitiateUserRequest.Builder
+    public func uuid(_ uuid: Swift.String) -> LikeMindsFeed.InitiateUserRequest.Builder
+    public func build() -> LikeMindsFeed.InitiateUserRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.InitiateUserRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct InitiateUserResponse : Swift.Decodable {
   public let accessToken: Swift.String
@@ -653,20 +795,30 @@ public struct Like : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class LikeCommentRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.LikeCommentRequest
-  public func build() -> LikeMindsFeed.LikeCommentRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.LikeCommentRequest
-  public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.LikeCommentRequest
+@_hasMissingDesignatedInitializers final public class LikeCommentRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.LikeCommentRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.LikeCommentRequest.Builder
+    public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.LikeCommentRequest.Builder
+    public func build() -> LikeMindsFeed.LikeCommentRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.LikeCommentRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class LikePostRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.LikePostRequest
-  public func build() -> LikeMindsFeed.LikePostRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.LikePostRequest
+@_hasMissingDesignatedInitializers final public class LikePostRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.LikePostRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.LikePostRequest.Builder
+    public func build() -> LikeMindsFeed.LikePostRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.LikePostRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct LikedUser : Swift.Codable {
   public let userId: Swift.Int
@@ -674,20 +826,30 @@ public struct LikedUser : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class LogoutRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.LogoutRequest
-  public func build() -> LikeMindsFeed.LogoutRequest
-  public func refreshToken(_ refreshToken: Swift.String) -> LikeMindsFeed.LogoutRequest
-  public func deviceId(_ deviceId: Swift.String) -> LikeMindsFeed.LogoutRequest
+@_hasMissingDesignatedInitializers final public class LogoutRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.LogoutRequest.Builder
+  public class Builder {
+    public init()
+    public func refreshToken(_ refreshToken: Swift.String) -> LikeMindsFeed.LogoutRequest.Builder
+    public func deviceId(_ deviceId: Swift.String) -> LikeMindsFeed.LogoutRequest.Builder
+    public func build() -> LikeMindsFeed.LogoutRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.LogoutRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class MarkReadNotificationRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.MarkReadNotificationRequest
-  public func build() -> LikeMindsFeed.MarkReadNotificationRequest
-  public func activityId(_ activityId: Swift.String) -> LikeMindsFeed.MarkReadNotificationRequest
+@_hasMissingDesignatedInitializers final public class MarkReadNotificationRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.MarkReadNotificationRequest.Builder
+  public class Builder {
+    public init()
+    public func activityId(_ activityId: Swift.String) -> LikeMindsFeed.MarkReadNotificationRequest.Builder
+    public func build() -> LikeMindsFeed.MarkReadNotificationRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.MarkReadNotificationRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct MemberMenu : Swift.Codable {
   public let route: Swift.String?
@@ -802,12 +964,17 @@ public class OGTags : Swift.Codable {
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class PinPostRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.PinPostRequest
-  public func build() -> LikeMindsFeed.PinPostRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.PinPostRequest
+@_hasMissingDesignatedInitializers final public class PinPostRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.PinPostRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.PinPostRequest.Builder
+    public func build() -> LikeMindsFeed.PinPostRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.PinPostRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct PollOption : Swift.Decodable {
   public let id: Swift.String?
@@ -869,27 +1036,37 @@ public struct AnyEncodable : Swift.Encodable {
   public init(_ value: Any)
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class RegisterDeviceRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.RegisterDeviceRequest
-  public func build() -> LikeMindsFeed.RegisterDeviceRequest
-  public func userId(_ userId: Swift.String) -> LikeMindsFeed.RegisterDeviceRequest
-  public func token(_ token: Swift.String) -> LikeMindsFeed.RegisterDeviceRequest
-  public func deviceId(_ deviceId: Swift.String) -> LikeMindsFeed.RegisterDeviceRequest
+@_hasMissingDesignatedInitializers final public class RegisterDeviceRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.RegisterDeviceRequest.Builder
+  public class Builder {
+    public init()
+    public func userId(_ userId: Swift.String) -> LikeMindsFeed.RegisterDeviceRequest.Builder
+    public func token(_ token: Swift.String) -> LikeMindsFeed.RegisterDeviceRequest.Builder
+    public func deviceId(_ deviceId: Swift.String) -> LikeMindsFeed.RegisterDeviceRequest.Builder
+    public func build() -> LikeMindsFeed.RegisterDeviceRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.RegisterDeviceRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct RegisterDeviceResponse : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class ReplyCommentRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.ReplyCommentRequest
-  public func build() -> LikeMindsFeed.ReplyCommentRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.ReplyCommentRequest
-  public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.ReplyCommentRequest
-  public func text(_ text: Swift.String?) -> LikeMindsFeed.ReplyCommentRequest
-  public func tempId(_ tempId: Swift.String?) -> LikeMindsFeed.ReplyCommentRequest
+@_hasMissingDesignatedInitializers final public class ReplyCommentRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.ReplyCommentRequest.Builder
+  public class Builder {
+    public init()
+    public func text(_ text: Swift.String?) -> LikeMindsFeed.ReplyCommentRequest.Builder
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.ReplyCommentRequest.Builder
+    public func commentId(_ commentId: Swift.String) -> LikeMindsFeed.ReplyCommentRequest.Builder
+    public func tempId(_ tempId: Swift.String?) -> LikeMindsFeed.ReplyCommentRequest.Builder
+    public func build() -> LikeMindsFeed.ReplyCommentRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.ReplyCommentRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct ReplyCommentResponse : Swift.Codable {
   public let comment: LikeMindsFeed.Comment?
@@ -907,33 +1084,48 @@ public enum ReportEntityType : Swift.Int, Swift.Encodable {
     get
   }
 }
-@_hasMissingDesignatedInitializers public class ReportRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.ReportRequest
-  public func build() -> LikeMindsFeed.ReportRequest
-  public func entityId(_ entityId: Swift.String) -> LikeMindsFeed.ReportRequest
-  public func entityType(_ entityType: LikeMindsFeed.ReportEntityType) -> LikeMindsFeed.ReportRequest
-  public func tagId(_ tagId: Swift.Int) -> LikeMindsFeed.ReportRequest
-  public func uuid(_ uuid: Swift.String) -> LikeMindsFeed.ReportRequest
-  public func reason(_ reason: Swift.String) -> LikeMindsFeed.ReportRequest
+@_hasMissingDesignatedInitializers final public class ReportRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.ReportRequest.Builder
+  public class Builder {
+    public init()
+    public func tagId(_ tagId: Swift.Int) -> LikeMindsFeed.ReportRequest.Builder
+    public func entityId(_ entityId: Swift.String) -> LikeMindsFeed.ReportRequest.Builder
+    public func uuid(_ uuid: Swift.String) -> LikeMindsFeed.ReportRequest.Builder
+    public func entityType(_ entityType: LikeMindsFeed.ReportEntityType) -> LikeMindsFeed.ReportRequest.Builder
+    public func reason(_ reason: Swift.String) -> LikeMindsFeed.ReportRequest.Builder
+    public func build() -> LikeMindsFeed.ReportRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.ReportRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class SavePostRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.SavePostRequest
-  public func build() -> LikeMindsFeed.SavePostRequest
-  public func postId(_ postId: Swift.String) -> LikeMindsFeed.SavePostRequest
+@_hasMissingDesignatedInitializers final public class SavePostRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.SavePostRequest.Builder
+  public class Builder {
+    public init()
+    public func postId(_ postId: Swift.String) -> LikeMindsFeed.SavePostRequest.Builder
+    public func build() -> LikeMindsFeed.SavePostRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.SavePostRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class SearchMembersRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.SearchMembersRequest
-  public func build() -> LikeMindsFeed.SearchMembersRequest
-  public func page(_ page: Swift.Int) -> LikeMindsFeed.SearchMembersRequest
-  public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.SearchMembersRequest
-  public func search(_ search: Swift.String) -> LikeMindsFeed.SearchMembersRequest
-  public func searchType(_ searchType: Swift.String) -> LikeMindsFeed.SearchMembersRequest
+@_hasMissingDesignatedInitializers final public class SearchMembersRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.SearchMembersRequest.Builder
+  public class Builder {
+    public init()
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.SearchMembersRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.SearchMembersRequest.Builder
+    public func search(_ search: Swift.String) -> LikeMindsFeed.SearchMembersRequest.Builder
+    public func searchType(_ searchType: Swift.String) -> LikeMindsFeed.SearchMembersRequest.Builder
+    public func build() -> LikeMindsFeed.SearchMembersRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.SearchMembersRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct SearchMembersResponse : Swift.Decodable {
   public let community: LikeMindsFeed.Community?
@@ -941,14 +1133,20 @@ public struct SearchMembersResponse : Swift.Decodable {
   public let totalFilteredMembers: Swift.Int?, totalMembers: Swift.Int?, totalOnlyMembers: Swift.Int?, totalPendingMembers: Swift.Int?
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers public class SearchPostsRequest {
-  public static func builder() -> LikeMindsFeed.SearchPostsRequest
-  public func build() -> Self
-  public func search(_ search: Swift.String) -> Self
-  public func searchType(_ searchType: Swift.String) -> Self
-  public func page(_ page: Swift.Int) -> Self
-  public func pageSize(_ pageSize: Swift.Int) -> Self
+@_hasMissingDesignatedInitializers public class SearchPostsRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.SearchPostsRequest.Builder
+  public class Builder {
+    public init()
+    public func search(_ search: Swift.String) -> LikeMindsFeed.SearchPostsRequest.Builder
+    public func searchType(_ searchType: Swift.String) -> LikeMindsFeed.SearchPostsRequest.Builder
+    public func page(_ page: Swift.Int) -> LikeMindsFeed.SearchPostsRequest.Builder
+    public func pageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.SearchPostsRequest.Builder
+    public func build() -> LikeMindsFeed.SearchPostsRequest
+    @objc deinit
+  }
+  public func toBuilder() -> LikeMindsFeed.SearchPostsRequest.Builder
   @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct ServiceAPI {
   public static let bucketURL: Swift.String
@@ -956,23 +1154,47 @@ public struct ServiceAPI {
   public static let secretAccessKey: Swift.String
   public static let accessKey: Swift.String
 }
-@_hasMissingDesignatedInitializers public class SubmitPollVoteRequest : Swift.Encodable {
-  public static func builder() -> LikeMindsFeed.SubmitPollVoteRequest
-  public func build() -> LikeMindsFeed.SubmitPollVoteRequest
-  public func pollID(_ pollID: Swift.String) -> LikeMindsFeed.SubmitPollVoteRequest
-  public func votes(_ votes: [Swift.String]) -> LikeMindsFeed.SubmitPollVoteRequest
+@_hasMissingDesignatedInitializers final public class SubmitPollVoteRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.SubmitPollVoteRequest.Builder
+  public class Builder {
+    public init()
+    public func pollID(_ pollID: Swift.String) -> LikeMindsFeed.SubmitPollVoteRequest.Builder
+    public func votes(_ votes: [Swift.String]) -> LikeMindsFeed.SubmitPollVoteRequest.Builder
+    public func build() -> LikeMindsFeed.SubmitPollVoteRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.SubmitPollVoteRequest.Builder
   @objc deinit
-  public func encode(to encoder: any Swift.Encoder) throws
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class TopicFeedRequest {
-  public static func builder() -> LikeMindsFeed.TopicFeedRequest
-  public func build() -> Self
-  public func setSearchTopic(_ topicName: Swift.String) -> Self
-  public func setSearchType(_ searchType: Swift.String) -> Self
-  public func setEnableState(_ isEnabled: Swift.Bool) -> Self
-  public func setPage(_ pageNumber: Swift.Int) -> Self
-  public func setPageSize(_ pageSize: Swift.Int) -> Self
+public enum SubmitPollVoteError : Swift.Error {
+  case pollIDNotProvided
+  public static func == (a: LikeMindsFeed.SubmitPollVoteError, b: LikeMindsFeed.SubmitPollVoteError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension LikeMindsFeed.SubmitPollVoteError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers final public class TopicFeedRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.TopicFeedRequest.Builder
+  public class Builder {
+    public init()
+    public func setSearchTopic(_ search: Swift.String) -> LikeMindsFeed.TopicFeedRequest.Builder
+    public func setSearchType(_ searchType: Swift.String) -> LikeMindsFeed.TopicFeedRequest.Builder
+    public func setEnableState(_ isEnabled: Swift.Bool) -> LikeMindsFeed.TopicFeedRequest.Builder
+    public func setPage(_ page: Swift.Int) -> LikeMindsFeed.TopicFeedRequest.Builder
+    public func setPageSize(_ pageSize: Swift.Int) -> LikeMindsFeed.TopicFeedRequest.Builder
+    public func build() -> LikeMindsFeed.TopicFeedRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.TopicFeedRequest.Builder
   @objc deinit
+  final public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct TopicFeedResponse : Swift.Decodable {
   public let topics: [LikeMindsFeed.TopicFeedResponse.TopicResponse]?
@@ -1044,12 +1266,32 @@ public struct UserDetails {
     _modify
   }
 }
-@_hasMissingDesignatedInitializers public class ValidateUserRequest {
-  public static func builder() -> LikeMindsFeed.ValidateUserRequest
-  public func build() -> LikeMindsFeed.ValidateUserRequest
-  public func accessToken(_ accessToken: Swift.String) -> LikeMindsFeed.ValidateUserRequest
-  public func refreshToken(_ refreshToken: Swift.String) -> LikeMindsFeed.ValidateUserRequest
+@_hasMissingDesignatedInitializers final public class ValidateUserRequest : Swift.Encodable {
+  public static func builder() -> LikeMindsFeed.ValidateUserRequest.Builder
+  public class Builder {
+    public init()
+    public func accessToken(_ accessToken: Swift.String) -> LikeMindsFeed.ValidateUserRequest.Builder
+    public func refreshToken(_ refreshToken: Swift.String) -> LikeMindsFeed.ValidateUserRequest.Builder
+    public func build() -> LikeMindsFeed.ValidateUserRequest
+    @objc deinit
+  }
+  final public func toBuilder() -> LikeMindsFeed.ValidateUserRequest.Builder
   @objc deinit
+  final public func encode(to encoder: any Swift.Encoder) throws
+}
+public enum ValidateUserError : Swift.Error {
+  case accessTokenNotProvided
+  case refreshTokenNotProvided
+  public static func == (a: LikeMindsFeed.ValidateUserError, b: LikeMindsFeed.ValidateUserError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension LikeMindsFeed.ValidateUserError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
 }
 public struct ValidateUserResponse : Swift.Decodable {
   public let user: LikeMindsFeed.User?
@@ -1077,3 +1319,7 @@ extension LikeMindsFeed.ManagerRightState : Swift.Hashable {}
 extension LikeMindsFeed.ReportEntityType : Swift.Equatable {}
 extension LikeMindsFeed.ReportEntityType : Swift.Hashable {}
 extension LikeMindsFeed.ReportEntityType : Swift.RawRepresentable {}
+extension LikeMindsFeed.SubmitPollVoteError : Swift.Equatable {}
+extension LikeMindsFeed.SubmitPollVoteError : Swift.Hashable {}
+extension LikeMindsFeed.ValidateUserError : Swift.Equatable {}
+extension LikeMindsFeed.ValidateUserError : Swift.Hashable {}
